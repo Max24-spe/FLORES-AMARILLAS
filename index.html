@@ -3,56 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Flores Amarillas Para Ti 🌻</title>
+    <title>Para ti 🌻</title>
     <style>
         body {
             margin: 0;
             padding: 0;
             background-color: #1a1a2e;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            color: white;
+            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
             height: 100vh;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow: hidden;
-            color: white;
-            text-align: center;
         }
-        .mensaje {
-            z-index: 10;
-            margin-bottom: 50px;
-            animation: fadeIn 3s ease-in-out;
+
+        /* Pantalla de inicio con el botón */
+        #pantalla-inicio {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #1a1a2e;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 100;
+            transition: opacity 1s ease;
         }
+
+        button {
+            background: linear-gradient(45deg, #FFD700, #FF8C00);
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.5rem;
+            color: #1a1a2e;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 140, 0, 0.6);
+            transition: transform 0.3s ease;
+            animation: latido 1.5s infinite;
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Contenido de la flor (oculto al principio) */
+        #contenido-sorpresa {
+            opacity: 0;
+            transition: opacity 2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
         h1 {
             color: #FFD700;
             text-shadow: 0 0 15px #FF8C00;
             font-size: 2.5rem;
-            margin-bottom: 10px;
+            margin-bottom: 5px;
         }
+
         p {
             font-size: 1.2rem;
             color: #e0e0e0;
+            max-width: 90%;
+            margin-bottom: 40px;
         }
-        /* Girasol CSS */
+
+        /* Girasol mejorado */
         .flower {
             position: relative;
             width: 100px;
             height: 100px;
-            animation: pulse 2.5s infinite alternate ease-in-out;
+            animation: pulse 3s infinite alternate ease-in-out;
         }
+
         .petal {
             position: absolute;
             width: 30px;
-            height: 110px;
+            height: 120px;
             background: linear-gradient(#FFD700, #FF8C00);
-            border-radius: 50px;
-            top: -55px;
+            border-radius: 50%;
+            top: -60px;
             left: 35px;
             transform-origin: bottom center;
-            box-shadow: 0 0 10px rgba(255, 140, 0, 0.5);
+            box-shadow: 0 0 15px rgba(255, 140, 0, 0.4);
         }
-        /* Posicionamiento de los pétalos */
+
         .petal:nth-child(1) { transform: rotate(0deg); }
         .petal:nth-child(2) { transform: rotate(45deg); }
         .petal:nth-child(3) { transform: rotate(90deg); }
@@ -61,67 +107,125 @@
         .petal:nth-child(6) { transform: rotate(225deg); }
         .petal:nth-child(7) { transform: rotate(270deg); }
         .petal:nth-child(8) { transform: rotate(315deg); }
-        
+
         .center {
             position: absolute;
             width: 60px;
             height: 60px;
-            background: radial-gradient(#5c2c06, #361700);
+            background: radial-gradient(#4a2505, #1e0d00);
             border-radius: 50%;
             top: 20px;
             left: 20px;
             z-index: 2;
             box-shadow: inset 0 0 15px #000;
         }
+
         .stem {
             position: absolute;
             width: 12px;
-            height: 200px;
+            height: 250px;
             background: linear-gradient(to right, #228B22, #006400);
             top: 80px;
             left: 44px;
             z-index: -1;
             border-radius: 10px;
         }
+
         .leaf {
             position: absolute;
-            width: 40px;
-            height: 40px;
-            background: #228B22;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(45deg, #228B22, #006400);
             border-radius: 0 50% 0 50%;
-            top: 130px;
+            top: 140px;
             left: 55px;
             z-index: -2;
             transform: rotate(15deg);
+            box-shadow: -2px 2px 5px rgba(0,0,0,0.5);
         }
-        @keyframes fadeIn {
-            0% { opacity: 0; transform: translateY(-20px); }
-            100% { opacity: 1; transform: translateY(0); }
+
+        .leaf.left {
+            top: 180px;
+            left: -5px;
+            transform: rotate(-105deg);
         }
+
         @keyframes pulse {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.08); }
+            0% { transform: scale(1) translateY(0); }
+            100% { transform: scale(1.05) translateY(-5px); }
         }
     </style>
 </head>
 <body>
-    <div class="mensaje">
-        <h1>¡Feliz Día de las Flores Amarillas! 💛</h1>
-        <p>Un detalle virtual para alegrar tu día.</p>
+
+    <!-- Pantalla inicial -->
+    <div id="pantalla-inicio">
+        <button onclick="iniciarSorpresa()">Tengo una sorpresa para ti 💛</button>
     </div>
-    
-    <div class="flower">
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="petal"></div>
-        <div class="center"></div>
-        <div class="stem"></div>
-        <div class="leaf"></div>
+
+    <!-- Contenido principal -->
+    <div id="contenido-sorpresa">
+        <h1>¡Feliz Día de las Flores Amarillas! 🌻</h1>
+        <p>Porque no podía dejar pasar este día sin darte un detalle. <br>Que esta promesa de alegría te acompañe siempre.</p>
+        
+        <div class="flower">
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="petal"></div>
+            <div class="center"></div>
+            <div class="stem"></div>
+            <div class="leaf"></div>
+            <div class="leaf left"></div>
+        </div>
     </div>
+
+    <!-- Reproductor de YouTube oculto -->
+    <div id="player" style="display: none;"></div>
+
+    <!-- Scripts para hacer funcionar la música y la animación -->
+    <script>
+        // Cargar la API de YouTube
+        var tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        var firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+        var player;
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: 'b4N4qNlq7jE', // ID del video de Floricienta
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0
+                }
+            });
+        }
+
+        // Función que se ejecuta al presionar el botón
+        function iniciarSorpresa() {
+            var inicio = document.getElementById('pantalla-inicio');
+            
+            // Iniciar la música
+            if(player && typeof player.playVideo === 'function') {
+                player.playVideo();
+            }
+
+            // Desvanecer la pantalla de inicio
+            inicio.style.opacity = '0';
+            
+            // Mostrar la flor después de 1 segundo
+            setTimeout(function() {
+                inicio.style.display = 'none';
+                document.getElementById('contenido-sorpresa').style.opacity = '1';
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
